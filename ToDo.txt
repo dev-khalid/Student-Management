@@ -1,0 +1,55 @@
+Users [name,contact,guardianInfo,password,email,role]
+  1.Student
+  2.Teacher 
+  3.Admin
+First Make this available for Individual teacher and his Students.  
+
+BatchInformation[teacher,subjectName,batchName,Price,timestamps]
+
+Subject[name,batchName] 
+
+Payment [studentId,TeacherId,batchName,status]
+
+syllabus 
+
+Exam [id,batchId,subjectId,teacherId,mark,startTime,endTime,participarnts[studentIds,marks],publishDate]
+
+#I want to implement this feature later after finishing all of the other features. 
+Notice Board [] - to be notified to target students  via email , browser notification whatsappNotification, and sms (nexmo). 
+
+
+
+
+On Monthly Information I will join all the schema . But for now lets create all of them Individually. 
+
+
+MonthlyClassRoutine [batchInfo,month(date,startingTime,endingTime,teacherInfo)]
+MonthlySyllabus [subjectName,batchInfo,teacherInfo,targetStudentsToNotify]
+MonthlyAttandance [status,teacher,batchInfo,Students]
+MonthlyExam [name,batchInfo,examSetter,fullmark,subject,heldDate,attandedStudentsInfo]
+
+Collect Information of a Student based on a month.(attandance,batchInfo,examPerformance,paymentStatus)
+Activity Of A Month : 
+    1.Student
+    2.Teacher 
+
+
+
+
+
+
+
+Functional Part 
+  Student - Figma Design should be ready for this functional part . 
+    1.Where he has studied Under which teacher and which subject for how much ammount and how was his performance.He paid the ammount or not ?  (Monthly Data)
+    2.Ability Download his report card . 
+    3.On Clicking batch he should be able to compare his rank with others . In fact there will be a table that will represent the rank of that batch for selected month. 
+    4.Able to download syllabus , class routine and see notice for that batch for a particular month.
+
+  Teacher 
+    1.Add Student , All Students 
+    2.Create Batch , Batch Informations . 
+    3.Create Subject , All Subjects 
+    4.Create Exam , Show all exam Information . 
+
+
