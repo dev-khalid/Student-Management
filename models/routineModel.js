@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-/**@Todo NEED TO think about this schema design again . I think this schema has some redundant fields.  */
+import mongoose from 'mongoose'; 
+
 const routineSchema = mongoose.Schema({
   batchId: {
     type: ObjectId,
@@ -10,14 +10,7 @@ const routineSchema = mongoose.Schema({
   },
   startTime: {
     type: Date,
-  },
-  endTime: {
-    type: Date,
-  },
-  teacherId: {
-    type: ObjectId,
-    ref: 'Teacher',
-  },
+  }, 
 });
 
 const Routine = mongoose.model('Routine', routineSchema);

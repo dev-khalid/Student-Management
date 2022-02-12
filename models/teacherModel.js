@@ -34,7 +34,8 @@ const teacherSchema = mongoose.Schema({
   /**@TODO - think more about payments and monthly payments  */
   monthlyPayments: [
     {
-      type: String,
+      type: Boolean,
+      //I think this should go in another schema .
     },
   ],
 });
