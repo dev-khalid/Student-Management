@@ -52,4 +52,6 @@ Functional Part
     3.Create Subject , All Subjects 
     4.Create Exam , Show all exam Information . 
 
+Thinking of functional part and implementation of that takes time . But it should not take more than 2 Days. And the Frontend should not take more then 2 Days  Right ? I will surely put my 100% on this application . 
+
 
