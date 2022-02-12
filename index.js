@@ -1,16 +1,44 @@
-import express from 'express'; 
-import dotenv from 'dotenv'; 
-import path from 'path'; 
-dotenv.config(); 
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import userRoutes from './routes/userRoutes.js';
+import examRoutes from './routes/examRoutes.js';
+import teacherRoutes from './routes/teacherRoutes.js';
+import studentRoutes from './routes/studentRoutes.js';
+import batchRoutes from './routes/batchRoutes.js';
+import routineRoutes from './routes/routineRoutes.js';
+import syllabusRoutes from './routes/syllabusRoutes.js';
+import subjectRoutes from './routes/subjectRoutes.js';
+dotenv.config();
 const __dirname = path.resolve();
+
+//Database Connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((con) => console.log('Connected to Database🚀🚀🚀'))
+  .catch((err) => console.log('Failed Db Connection😟'));
+
 const app = express();
 
-app.get('/api',(req,res,next) => { 
-  res.send("Hello from Backend"); 
-})  
+app.use(cors());
+app.use(express.json());
 
+app.get('/api', (req, res, next) => {
+  res.send('Hello from Backend');
+});
 
-
+app.use('/api/user', userRoutes);
+app.use('/api/teacher', teacherRoutes);
+app.use('/api/student', studentRoutes);
+app.use('/api/batch', batchRoutes);
+app.use('/api/exam', examRoutes);
+app.use('/api/syllabus', syllabusRoutes);
+app.use('/api/subject', subjectRoutes);
 
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
@@ -19,5 +47,5 @@ if (process.env.NODE_ENV == 'production') {
     res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
   });
 }
-const PORT = process.env.PORT || 5000; 
-app.listen(PORT,() => console.log(`Server is running on port ${PORT}`))
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
