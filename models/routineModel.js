@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const routineSchema = mongoose.Schema({
   batchId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Batch',
   },
   classDate: {
@@ -10,7 +10,7 @@ const routineSchema = mongoose.Schema({
   },
   startTime: {
     type: Date,
-  }, 
+  },
 });
 
 const Routine = mongoose.model('Routine', routineSchema);

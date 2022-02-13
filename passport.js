@@ -6,8 +6,7 @@ import JWTStrategy from 'passport-jwt/lib/strategy.js';
 import passportJWT from 'passport-jwt';
 const ExtractJWT = passportJWT.ExtractJwt;
 import dotenv from 'dotenv';
-dotenv.config();
-console.log(process.env.JWT_SECRET);
+dotenv.config(); 
 passport.use(
   new LocalStrategy(
     { usernameField: 'email', passwordField: 'password' },

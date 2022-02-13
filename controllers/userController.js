@@ -2,6 +2,7 @@ import expressAsyncHandler from 'express-async-handler';
 import passport from 'passport';
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import Teacher from '../models/teacherModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
 /**@TODO I need to log in the user right away . ? Make the decision later on . */
@@ -11,7 +12,12 @@ export const registerUser = expressAsyncHandler(async (req, res, next) => {
     res.send('You are not allowed to register as Admin Directly');
     return;
   }
+
   const data = await User.create(user);
+  if (data.role == 'teacher') {
+    //create a teacher document right now .
+    const teacher = await Teacher.create({ userId: data._id });
+  }
   res.status(201).json(data);
 });
 
@@ -27,9 +33,9 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
     req.login(user, { session: false }, (err) => {
       if (err) {
         res.send(err);
-      }  
-      const token = jwt.sign({ ...user }._doc, process.env.JWT_SECRET);   
-      return res.json({ user, token });
+      }
+      const token = jwt.sign({ ...user }._doc, process.env.JWT_SECRET);
+      return res.json({ token });
     });
   })(req, res);
 });

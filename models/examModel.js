@@ -2,16 +2,16 @@ import mongoose from 'mongoose';
 
 const examSchema = mongoose.Schema({
   teacherIds: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Teacher',
   },
 
   subjectIds: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Subject',
   },
   batchId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Batch',
   },
   totalMark: {
@@ -20,7 +20,7 @@ const examSchema = mongoose.Schema({
   },
   participants: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Student',
       mark: {
         type: Number,

@@ -5,7 +5,7 @@ const syllabusSchema = mongoose.Schema({
     type: String,
     required: ['Syllabus must have a description'],
     subjectId: {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Subject',
     },
     /**@TODO need to fix this date time issue */

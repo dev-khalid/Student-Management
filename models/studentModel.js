@@ -2,31 +2,31 @@ import mongoose from 'mongoose';
 
 const studentSchema = mongoose.Schema({
   userId: {
-    type: ObjectId,
+    type:  mongoose.Types.ObjectId,
     ref: 'User',
     required: ['User Id is required'],
   },
   teacherIds: [
     {
-      type: ObjectId,
+      type:  mongoose.Types.ObjectId,
       ref: 'Teacher',
     },
   ],
   batchIds: [
     {
-      type: ObjectId,
+      type:  mongoose.Types.ObjectId,
       ref: 'Batch',
     },
   ],
   subjectIds: [
     {
-      type: ObjectId,
+      type:  mongoose.Types.ObjectId,
       ref: 'Subject',
     },
   ],
   examIds: [
     {
-      type: ObjectId,
+      type:  mongoose.Types.ObjectId,
       ref: 'Exam',
     },
   ],

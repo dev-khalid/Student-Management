@@ -11,15 +11,15 @@ const paymentSchema = mongoose.Schema({
     type: Date,
   },
   batchId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Batch',
   },
   teacherId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Teacher',
   },
   studentId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: 'Student',
   },
 });

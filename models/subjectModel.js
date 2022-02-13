@@ -5,7 +5,7 @@ const subjectSchema = mongoose.Schema({
     required: ['Subject must have a name'],
   },
   batchId: {
-    type: String,
+    type: mongoose.Types.ObjectId,
     ref: 'Batch',
   },
 });

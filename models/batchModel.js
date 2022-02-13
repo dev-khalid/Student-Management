@@ -2,41 +2,42 @@ import mongoose from 'mongoose';
 
 const batchSchema = mongoose.Schema({
   name: {
-    types: String,
-    required: ['Batch Must Have a name'],
+    type: String,
+    required: [true,'Batch Must Have a name'],
   },
   studentIds: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Student',
     },
   ],
-  teacherIds: {
-    type: ObjectId,
+  teacherId: {
+    type: mongoose.Types.ObjectId,
     ref: 'Teacher',
+    required: [true,'Batch Must be created by a Teacher'],
   },
 
   subjectIds: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Subject',
     },
   ],
   examIds: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Exam',
     },
   ],
   routineIds: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Routine',
     },
   ],
   syllabusIds: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'Syllabus',
     },
   ],
@@ -49,7 +50,7 @@ const batchSchema = mongoose.Schema({
   ],
   fees: {
     type: Number,
-    required: ['Batch Must Have some Fees'],
+    required: [true,'Batch Must Have some Fees']
   },
 });
 
