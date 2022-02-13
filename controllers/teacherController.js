@@ -4,6 +4,7 @@ import Batch from '../models/batchModel.js';
 import Subject from '../models/subjectModel.js';
 import Exam from '../models/examModel.js';
 import Student from '../models/studentModel.js';
+import mongoose from 'mongoose';
 
 export const createBatch = expressAsyncHandler(async (req, res) => {
   const data = req.body;
@@ -140,12 +141,6 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
   res.json(students);
 });
 
-//i will nedd this in frontend.
-export const examInfo = expressAsyncHandler(async (req, res) => {
-  const data = await Exam.findById(req.params.examId);
-  res.json(data);
-});
-
 export const publishResult = expressAsyncHandler(async (req, res) => {
   //then on that batch i will need to iterate through examId->participants.
   //then i have to update those results.
@@ -160,4 +155,49 @@ export const publishResult = expressAsyncHandler(async (req, res) => {
   );
 
   res.json(result);
+});
+
+export const batchInfo = expressAsyncHandler(async (req, res) => {
+  const data = await Batch.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(req.params.batchId),
+      },
+    },
+    {
+      $lookup: {
+        from: 'exams',
+        localField: 'examIds',
+        foreignField: '_id',
+        as: 'exams',
+      },
+    },
+  ]);
+  res.json(data);
+});
+
+export const examInfo = expressAsyncHandler(async (req, res) => {
+  //from - to exam information should be provided.
+  let filter = {};
+  if (req.params.from) {
+    filter = {
+      $gte: new Date(req.params.from).toISOString(),
+    };
+  }
+  if (req.params.to) {
+    filter = { ...filter, $lte: new Date(req.params.to).toISOString() };
+  }
+
+  const searchObj =
+    Object.keys(filter).length == 0
+      ? {
+          batchId: req.params.batchId,
+        }
+      : {
+          batchId: req.params.batchId,
+          examDate: filter,
+        };
+
+  const data = await Exam.find(searchObj);
+  res.json(data);
 });

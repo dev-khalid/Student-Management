@@ -2,11 +2,13 @@ import express from 'express';
 import passport from 'passport';
 import {
   addStudentToBatch,
+  batchInfo,
   createBatch,
   createExam,
   createRoutine,
   createSubject,
   createSyllabus,
+  examInfo,
   getAllBatch,
   getAllStudent,
   publishResult,
@@ -19,19 +21,15 @@ const router = express.Router();
 router.use(passport.authenticate('jwt', { session: false }));
 router.post('/createbatch', createBatch);
 router.post('/createsubject', createSubject);
-router.patch('/createroutine/:batchId',createRoutine);  
-router.patch('/createsyllabus/:batchId',createSyllabus); 
-router.post('/createexam',createExam); 
+router.patch('/createroutine/:batchId', createRoutine);
+router.patch('/createsyllabus/:batchId', createSyllabus);
+router.post('/createexam', createExam);
 router.get('/allbatch', getAllBatch);
-router.post('/createstudent',registerUser); 
-router.get('/allstudents',getAllStudent); 
-router.patch('/addstudenttobatch', addStudentToBatch); 
-router.patch('/publishresult',publishResult);  
-router.patch('/examresult/:batchId/:examId'); 
-router.get('/batchinfo/:from?/:to?');
-//add student to a batch . 
-//add payment infos.
-//student can send teacher a paidApprovalRequest . 
-//fix the result issue . 
-//fix all of the monthly data issue . from teacher and from student part .  
+router.post('/createstudent', registerUser);
+router.get('/allstudents', getAllStudent);
+router.patch('/addstudenttobatch', addStudentToBatch);
+router.patch('/publishresult', publishResult);
+router.get('/batchinfo/:batchId', batchInfo);
+router.get('/allexams/:batchId/:from?/:to?',examInfo);//ekta certain range a koyta exam hoiche seita check korar jonne ei route
+
 export default router;

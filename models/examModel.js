@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const examSchema = mongoose.Schema({
+  examDate: { 
+    type: Date, 
+    required: [true, 'Exam must have a date'],
+  },
   teacherId: {
     type: mongoose.Types.ObjectId,
     ref: 'Teacher',
