@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import './passport.js';
 import userRoutes from './routes/userRoutes.js';
 import examRoutes from './routes/examRoutes.js';
 import teacherRoutes from './routes/teacherRoutes.js';
@@ -39,6 +40,8 @@ app.use('/api/batch', batchRoutes);
 app.use('/api/exam', examRoutes);
 app.use('/api/syllabus', syllabusRoutes);
 app.use('/api/subject', subjectRoutes);
+
+/**@TODO need to create a custom error handler.  */
 
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));

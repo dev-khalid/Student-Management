@@ -1,10 +1,16 @@
-import express from 'express'; 
-const router = express.Router(); 
+import express from 'express';
+import passport from 'passport';
+import { registerUser, loginUser } from '../controllers/userController.js';
+const router = express.Router();
 
+router.post('/register', registerUser);
+router.post('/login', loginUser);
 
+//following routes will be protected .
+router.use(passport.authenticate('jwt', { session: false }));
 
+router.get('/locked', (req, res) => {
+  res.send('working fine');
+});
 
-
-export default router; 
-
- 
+export default router;
