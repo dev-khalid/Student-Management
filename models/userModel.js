@@ -7,7 +7,7 @@ import validator from 'validator';
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: ['User Must have a name'],
+    required: [true,'User Must have a name'],
   },
   email: {
     type: String,
