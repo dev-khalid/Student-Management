@@ -9,8 +9,6 @@ import examRoutes from './routes/examRoutes.js';
 import teacherRoutes from './routes/teacherRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import batchRoutes from './routes/batchRoutes.js';
-import routineRoutes from './routes/routineRoutes.js';
-import syllabusRoutes from './routes/syllabusRoutes.js';
 import subjectRoutes from './routes/subjectRoutes.js';
 dotenv.config();
 const __dirname = path.resolve();
@@ -38,7 +36,6 @@ app.use('/api/teacher', teacherRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/batch', batchRoutes);
 app.use('/api/exam', examRoutes);
-app.use('/api/syllabus', syllabusRoutes);
 app.use('/api/subject', subjectRoutes);
 
 /**@TODO need to create a custom error handler.  */

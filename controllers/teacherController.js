@@ -2,6 +2,7 @@ import expressAsyncHandler from 'express-async-handler';
 import Teacher from '../models/teacherModel.js';
 import Batch from '../models/batchModel.js';
 import Subject from '../models/subjectModel.js';
+import Exam from '../models/examModel.js';
 
 export const createBatch = expressAsyncHandler(async (req, res) => {
   const data = req.body;
@@ -52,4 +53,55 @@ export const getAllBatch = expressAsyncHandler(async (req, res) => {
     'name'
   );
   res.json(data);
+});
+
+export const createRoutine = expressAsyncHandler(async (req, res) => {
+  const batch = await Batch.findByIdAndUpdate(
+    req.params.batchId,
+    {
+      $push: {
+        routines: req.body,
+      },
+    },
+    { new: true }
+  );
+  console.log(batch);
+  res.status(200).send('Routine Addedd Successfully');
+});
+export const createSyllabus = expressAsyncHandler(async (req, res) => {
+  const batch = await Batch.findByIdAndUpdate(
+    req.params.batchId,
+    {
+      $push: {
+        syllabus: req.body,
+      },
+    },
+    { new: true }
+  );
+  res.status(200).send('Syllabus Add Successfully');
+});
+
+export const createExam = expressAsyncHandler(async (req, res) => {
+  const data = req.body;
+  const studentIds = await Batch.findById(req.body.batchId).select(
+    'studentIds'
+  );
+  // console.log(studentIds);
+  const formatedDateForParticipants = studentIds.map((item) => {
+    return {
+      studentId: item,
+      mark: 0,
+    };
+  });
+
+  data.participants = formatedDateForParticipants;
+  data.teacherId = req.user._id;
+
+  const exam = await Exam.create(data);
+  const batch = await Batch.findByIdAndUpdate(req.body.batchId, {
+    $push: {
+      examIds: exam._id,
+    },
+  });
+  res.status(201).json(exam);
 });

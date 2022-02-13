@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 const examSchema = mongoose.Schema({
-  teacherIds: {
+  teacherId: {
     type: mongoose.Types.ObjectId,
     ref: 'Teacher',
   },
 
-  subjectIds: {
+  subjectId: {
     type: mongoose.Types.ObjectId,
     ref: 'Subject',
   },
@@ -18,10 +18,13 @@ const examSchema = mongoose.Schema({
     type: Number,
     required: ['Exam Must Have some numbers'],
   },
+  //by default all students should be added to this participants list from selected batch
   participants: [
     {
-      type: mongoose.Types.ObjectId,
-      ref: 'Student',
+      studentId: { 
+        type: mongoose.Types.ObjectId,
+        ref: 'Student',
+      },
       mark: {
         type: Number,
         default: 0,
@@ -30,10 +33,10 @@ const examSchema = mongoose.Schema({
   ],
   /**@TODO need to fix all of the date time issue  */
   startTime: {
-    type: Date,
+    type: String,
   },
   endTime: {
-    type: Date,
+    type: String,
   },
   publishDate: {
     type: Date,
