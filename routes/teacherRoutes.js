@@ -1,14 +1,12 @@
 import express from 'express';
 import passport from 'passport';
 import {
-  addStudentToBatch,
-  batchInfo,
+  addStudentToBatch, 
   createBatch,
   createExam,
   createRoutine,
   createSubject,
-  createSyllabus,
-  examInfo,
+  createSyllabus, 
   getAllBatch,
   getAllStudent,
   publishResult,
@@ -29,7 +27,5 @@ router.post('/createstudent', registerUser);
 router.get('/allstudents', getAllStudent);
 router.patch('/addstudenttobatch', addStudentToBatch);
 router.patch('/publishresult', publishResult);
-router.get('/batchinfo/:batchId', batchInfo);
-router.get('/allexams/:batchId/:from?/:to?',examInfo);//ekta certain range a koyta exam hoiche seita check korar jonne ei route
 
 export default router;
