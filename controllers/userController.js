@@ -22,6 +22,7 @@ export const registerUser = expressAsyncHandler(async (req, res, next) => {
   }
   if (req.body.role == 'student') {
     //create the user and also create student document on the fly
+    //what about guardian number ? 
     const student = await Student.create({
       userId: data._id,
       teacherIds: [req.user._id],
