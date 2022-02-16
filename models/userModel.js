@@ -7,7 +7,7 @@ import validator from 'validator';
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true,'User Must have a name'],
+    required: [true, 'User Must have a name'],
   },
   email: {
     type: String,
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: ['Please enter your password'],
     minLength: 6,
-    select: false, 
+    select: false,
     //if registerType is user-pass then we need the pass
   },
   registerType: {
@@ -46,8 +46,11 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
-userSchema.methods.checkPassword = async function(candidatePassword,userPassword) { 
-  return await bcrypt.compare(candidatePassword,userPassword); 
-}
+userSchema.methods.checkPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 const User = mongoose.model('User', userSchema);
 export default User;

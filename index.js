@@ -28,7 +28,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api', (req, res, next) => {
-  console.log('at least coming through here. ');
   res.send('Hello from Backend');
 });
 
@@ -39,6 +38,17 @@ app.use('/api/batch', batchRoutes);
 app.use('/api/exam', examRoutes);
 app.use('/api/subject', subjectRoutes);
 
+app.use((err, req, res, next) => {
+  /**@TODO - I NEED TO SUTDY ABOUT CUSTOM ERROR HANDLER  */
+  if (err.message.includes('duplicate key error')) {
+    res.send({
+      success: false,
+      error: 'Email Already Exists',
+    });
+  } else {
+    next();
+  }
+});
 /**@TODO need to create a custom error handler.  */
 
 if (process.env.NODE_ENV == 'production') {

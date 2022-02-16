@@ -14,14 +14,7 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 const App = () => {
-  const [loggedIn, sL] = useState(false);
-  useEffect(() => {
-    const fun = async () => {
-      const {data} = await axios.get('api');
-      console.log(data);
-    };
-    fun();
-  }, []);
+  const [loggedIn, sL] = useState(false); 
   return (
     <Layout>
       <BrowserRouter>

@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 import Student from '../models/studentModel.js';
 dotenv.config();
 /**@TODO I need to log in the user right away . ? Make the decision later on . */
-export const registerUser = expressAsyncHandler(async (req, res, next) => {
+export const registerUser = expressAsyncHandler(async (req, res, next) => { 
   const user = req.body;
  
   if (user.role === 'admin') {
