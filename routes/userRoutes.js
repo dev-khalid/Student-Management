@@ -5,10 +5,11 @@ const router = express.Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-
 //following routes will be protected .
 router.use(passport.authenticate('jwt', { session: false }));
-router.post('/logout', (req, res) => {
+
+router.post('/logout', (req, res) => { 
+  console.log(req.headers); 
   req.logout();
   res.send('Successfully Logged Out!');
 });
