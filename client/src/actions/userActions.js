@@ -20,6 +20,7 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+    localStorage.setItem('user',JSON.stringify(data)); 
   } catch (error) {
     console.error(error);
     dispatch({
@@ -38,6 +39,7 @@ export const logout = (token) => async (dispatch) => {
         authorization: 'Bearer ' + token,
       },
     });
+    localStorage.removeItem('user'); 
     dispatch({
       type: USER_LOGOUT,
     });

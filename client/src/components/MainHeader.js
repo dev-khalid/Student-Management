@@ -3,16 +3,14 @@ import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userActions';
-import {UserOutlined,LogoutOutlined} from '@ant-design/icons' ;
-
-
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 
 const { Header } = Layout;
 const MainHeader = () => {
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.user); 
-  const logoutHandler = () => { 
+  const { user } = useSelector((state) => state.user);
+  const logoutHandler = () => {
     dispatch(logout(user.token));
   };
   return (

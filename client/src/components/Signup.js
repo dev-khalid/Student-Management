@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Row,
@@ -12,8 +12,13 @@ import {
   Spin,
 } from 'antd';
 import axios from 'axios';
+import { useDispatch ,useSelector} from 'react-redux';
+import {login }from '../actions/userActions'; 
 
 const Signup = () => {
+  const {user} = useSelector(state=>state.user); 
+
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +27,12 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+
+  useEffect(() => { 
+    if(user) { 
+      navigate('/home'); 
+    }
+  },[user])
   const submitHandler = () => {
     message.loading({
       content: 'Please Wait register in progress...',
@@ -51,10 +62,11 @@ const Signup = () => {
           });
         } else {
           message.success({
-            content: 'User Registered Successfully',
+            content: 'Registered Successfully.Signing in...',
           });
-
-          navigate('/login');
+          //log the user in immediately .
+          dispatch(login(email, password));
+          navigate('/home');
           console.log(data);
         }
         setLoading(false);
