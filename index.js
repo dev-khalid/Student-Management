@@ -28,6 +28,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api', (req, res, next) => {
+  console.log('at least coming through here. ');
   res.send('Hello from Backend');
 });
 

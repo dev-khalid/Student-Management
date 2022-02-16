@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import axios from 'axios';
 import { Layout, Menu, Breadcrumb } from 'antd';
 
 import Home from './components/Home';
@@ -15,7 +15,13 @@ const { Header, Content, Sider } = Layout;
 
 const App = () => {
   const [loggedIn, sL] = useState(false);
-
+  useEffect(() => {
+    const fun = async () => {
+      const {data} = await axios.get('api');
+      console.log(data);
+    };
+    fun();
+  }, []);
   return (
     <Layout>
       <BrowserRouter>
