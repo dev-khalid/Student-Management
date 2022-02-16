@@ -12,7 +12,7 @@ const reducers = combineReducers({
 const middlewares = [thunk];
 const initialState = {
   ghorarDim: 'ghora jei dim pare',
-  user: { user: JSON.parse(localStorage.getItem('user')) },
+  user: {   user: JSON.parse(localStorage.getItem('user')) },
 };
 const store = createStore(
   reducers,
