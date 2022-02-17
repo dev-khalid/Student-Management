@@ -73,11 +73,6 @@ const Profile = () => {
           </Menu>
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
           <Content
             className="site-layout-background"
             style={{
@@ -86,7 +81,8 @@ const Profile = () => {
               minHeight: 280,
             }}
           >
-            <Outlet />
+            
+            <Outlet /> 
           </Content>
         </Layout>
       </Layout>
