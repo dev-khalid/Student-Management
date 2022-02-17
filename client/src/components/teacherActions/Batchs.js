@@ -1,9 +1,8 @@
 import React from 'react';
 import { Table, Button } from 'antd';
 import CreateBatch from './CreateBatch';
-
+import { Link, Outlet } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-
 const { Column } = Table;
 const Batchs = () => {
   const data = [
@@ -14,7 +13,7 @@ const Batchs = () => {
       studentNumber: 10,
       examNumber: 12,
       fees: 1500,
-      _id: 'id of the batch',
+      _id: '1',
     },
   ];
   const viewHandler = (_id) => {
@@ -43,10 +42,11 @@ const Batchs = () => {
           key="_id"
           render={(_id) => (
             <>
-              <Button type="primary" onClick={() => viewHandler(_id)}>
-                {' '}
-                <EyeOutlined />
-              </Button>
+              <Link to={`/profile/batchs/${_id}`}>
+                <Button type="primary">
+                  <EyeOutlined />
+                </Button>
+              </Link>
             </>
           )}
         />

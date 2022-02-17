@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import CreateExam from './CreateExam';
-
+import { Link } from 'react-router-dom';
 const { Column } = Table;
 
 const Exams = () => {
@@ -45,9 +45,11 @@ const Exams = () => {
           title="Actions"
           dataIndex="_id"
           render={(_id) => (
-            <Button type="primary" onClick={() => viewHandler(_id)}>
-              <EyeOutlined />
-            </Button>
+            <Link to={`/profile/exams/${_id}`}>
+              <Button type="primary" onClick={() => viewHandler(_id)}>
+                <EyeOutlined />
+              </Button>
+            </Link>
           )}
         />
       </Table>

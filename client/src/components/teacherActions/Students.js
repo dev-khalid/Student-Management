@@ -89,9 +89,9 @@ const Students = () => {
                   </Button>
                 </Col>
                 <Col>
-                  <Button type="primary" onClick={deleteHandler}>
+                  <Link to={`/profile/students/${_id}`} ><Button type="primary" >
                     <EyeOutlined />
-                  </Button>
+                  </Button></Link>
                 </Col>
               </Row>
             </>
