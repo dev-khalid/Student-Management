@@ -43,13 +43,11 @@ const CreateStudent = () => {
           <Form.Item label="Name">
             <Input placeholder="Enter students name" />
           </Form.Item>
-          <Form.Item label="Batch">
-            <Input.Group compact>
-              <Select defaultValue="Option1">
+          <Form.Item label="Batch"> 
+              <Select  defaultValue="Option1">
                 <Option value="Option1">Option1</Option>
                 <Option value="Option2">Option2</Option>
-              </Select>
-            </Input.Group>
+              </Select> 
           </Form.Item>
           <Form.Item label="Email">
             <Input placeholder="Enter email" />
