@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, Button } from 'antd';
 import CreateBatch from './CreateBatch';
 import { Link, Outlet } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { allBatchs } from '../../actions/batchActions';
+
 const { Column } = Table;
+
 const Batchs = () => {
+  const dispatch = useDispatch();
+
+  const { loading, error, batchs } = useSelector((state) => state.batchs);
+  const { user } = useSelector((state) => state.user);
+  useEffect(() => {
+    dispatch(allBatchs(user.token));
+  }, [user]);
+
   const data = [
     {
       key: '1',

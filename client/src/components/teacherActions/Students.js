@@ -7,7 +7,7 @@ const { Column } = Table;
 
 const Students = () => {
   //now we will call an action to get all students data from backend .
-
+  /**@TODO - i have to make this component dynamic . so that whenever i want i can render this table based on teacher id or batchId . that means teacher specific or batch specific */
   const dataSource = [
     {
       key: '2',

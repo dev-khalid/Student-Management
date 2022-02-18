@@ -18,6 +18,7 @@ import Profile from './components/Profile';
 import BatchDetails from './components/teacherActions/BatchDetails';
 import StudentDetails from './components/teacherActions/StudentDetails';
 import ExamDetails from './components/teacherActions/ExamDetails';
+
 const { SubMenu } = Menu;
 
 const App = () => {
