@@ -50,7 +50,7 @@ export const createSubject = expressAsyncHandler(async (req, res) => {
 });
 
 export const getAllBatch = expressAsyncHandler(async (req, res) => {
-  const data = await Batch.findOne({ teacherId: req.user._id })
+  const data = await Batch.find({ teacherId: req.user._id })
     .populate('subjectIds', 'name')
     .populate('examIds');
   res.json(data);

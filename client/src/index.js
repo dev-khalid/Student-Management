@@ -8,12 +8,13 @@ import store from './Store';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 //this is being setup automatically . for axios
-console.log(process.env.REACT_APP_ENVIRONMENT);
-if (process.env.REACT_APP_ENVIRONMENT === 'DEV')
-  axios.defaults.baseURL = process.env.REACT_APP_BASEURL_DEVELOPMENT;
-else {
-  axios.defaults.baseURL = process.env.REACT_APP_BASEURL_PRODUCTION;
-}
+
+/* production 
+axios.defaults.baseURL =
+  'https://khalid-student-management.herokuapp.com/';
+*/
+axios.defaults.baseURL = 'http://localhost:5000/';
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
