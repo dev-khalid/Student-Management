@@ -17,7 +17,7 @@ export const allBatchs = (token) => async (dispatch) => {
       headers: {
         'content-type': 'application/json',
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjA4NmQyMWEzOTcxOGE3ZTNlYzE5YmQiLCJuYW1lIjoiS2hhbGlkIEhvc3NhaW4iLCJlbWFpbCI6ImtoYWxpZEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuc1l2SkhsL0RiUGZ0NXExNWc0eFEuUmxZak9DdDM3dWNxTlZaU2xGaUZoVXBCMVdCM0lULiIsInJlZ2lzdGVyVHlwZSI6ImVtYWlscGFzcyIsInJvbGUiOiJhZG1pbiIsImNvbnRyYWN0Ijoic29tZXRoaW5nQGdtYWlsLmNvbSIsIl9fdiI6MCwiaWF0IjoxNjQ1MDI0ODAxfQ.wwOYsJbdv4AmCH1_TAb9A1FTt0Y-TEGunUlvhfDxqQ0',
+          `Bearer ${token}`,
       },
     };
     const { data } = await axios.get('api/teacher/allbatch', headerConfig);

@@ -1,55 +1,74 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import CreateStudent from './CreateStudent';
+import { allStudents } from '../../actions/studentActions';
+import { useSelector, useDispatch } from 'react-redux';
 const { Column } = Table;
 
 const Students = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { students } = useSelector((state) => state.students);
+  useEffect(() => {
+    dispatch(allStudents(user.token));
+  }, [user]);
+
   //now we will call an action to get all students data from backend .
   /**@TODO - i have to make this component dynamic . so that whenever i want i can render this table based on teacher id or batchId . that means teacher specific or batch specific */
-  const dataSource = [
-    {
-      key: '2',
-      name: 'John',
-      address: '10 Downing Street',
-      _id: 'abcdefg',
-      email: 'something@ggmail.com',
-      password: 'nothing',
-      contract: 'something else',
-      guardianNumber: '00000000',
-    },
-    {
-      key: '2',
-      name: 'John',
-      address: '10 Downing Street',
-      _id: 'abcdefg',
-      email: 'something@ggmail.com',
-      password: 'nothing',
-      contract: 'something else',
-      guardianNumber: '00000000',
-    },
-    {
-      key: '2',
-      name: 'John',
-      address: '10 Downing Street',
-      _id: 'abcdefg',
-      email: 'something@ggmail.com',
-      password: 'nothing',
-      contract: 'something else',
-      guardianNumber: '00000000',
-    },
-    {
-      key: '2',
-      name: 'John',
-      address: '10 Downing Street',
-      _id: 'abcdefg',
-      email: 'something@ggmail.com',
-      password: 'nothing',
-      contract: 'something else',
-      guardianNumber: '00000000',
-    },
-  ];
+
+  let dataSource = [];
+  if (students)
+    dataSource = students.map((student) => {
+      return {
+        key: student._id,
+        password: 'something',
+        ...student,
+      };
+    });
+  // const dataSource = [
+  //   {
+  //     key: '2',
+  //     name: 'John',
+  //     address: '10 Downing Street',
+  //     _id: 'abcdefg',
+  //     email: 'something@ggmail.com',
+  //     password: 'nothing',
+  //     contract: 'something else',
+  //     guardianNumber: '00000000',
+  //   },
+  //   {
+  //     key: '2',
+  //     name: 'John',
+  //     address: '10 Downing Street',
+  //     _id: 'abcdefg',
+  //     email: 'something@ggmail.com',
+  //     password: 'nothing',
+  //     contract: 'something else',
+  //     guardianNumber: '00000000',
+  //   },
+  //   {
+  //     key: '2',
+  //     name: 'John',
+  //     address: '10 Downing Street',
+  //     _id: 'abcdefg',
+  //     email: 'something@ggmail.com',
+  //     password: 'nothing',
+  //     contract: 'something else',
+  //     guardianNumber: '00000000',
+  //   },
+  //   {
+  //     key: '2',
+  //     name: 'John',
+  //     address: '10 Downing Street',
+  //     _id: 'abcdefg',
+  //     email: 'something@ggmail.com',
+  //     password: 'nothing',
+  //     contract: 'something else',
+  //     guardianNumber: '00000000',
+  //   },
+  // ];
   const deleteHandler = () => console.log('deleted');
   return (
     <>
@@ -89,16 +108,17 @@ const Students = () => {
                   </Button>
                 </Col>
                 <Col>
-                  <Link to={`/profile/students/${_id}`} ><Button type="primary" >
-                    <EyeOutlined />
-                  </Button></Link>
+                  <Link to={`/profile/students/${_id}`}>
+                    <Button type="primary">
+                      <EyeOutlined />
+                    </Button>
+                  </Link>
                 </Col>
               </Row>
             </>
           )}
         />
       </Table>
-
     </>
   );
 };
