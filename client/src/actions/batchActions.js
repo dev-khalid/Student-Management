@@ -11,24 +11,21 @@ import {
 } from '../constants/batchConstants';
 import axios from 'axios';
 
+//axios header setting issues fixed .
+const userData = JSON.parse(localStorage.getItem('user'));
+axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+
 export const createBatch =
-  ({ name, fees, token }) =>
+  ({ name, fees }) =>
   async (dispatch) => {
     try {
       dispatch({ type: CREATE_BATCH_REQUEST });
-      const { data } = await axios.post(
-        '/api/teacher/createbatch',
-        {
-          headers: {
-            'content-type': 'application/json',
-            authorization: `Bearer ${token}`,
-          },
-        },
-        {
-          name,
-          fees,
-        }
-      );
+
+      const { data } = await axios.post('/api/teacher/createbatch', {
+        name,
+        fees,
+      });
+      console.log('which data is coming back ? ', data);
       dispatch({
         type: CREATE_BATCH_SUCCESS,
         payload: data,
@@ -41,18 +38,13 @@ export const createBatch =
     }
   };
 
-export const allBatchs = (token) => async (dispatch) => {
+export const allBatchs = () => async (dispatch) => {
   try {
     dispatch({
       type: ALL_BATCH_REQUEST,
     });
-    const headerConfig = {
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const { data } = await axios.get('api/teacher/allbatch', headerConfig);
+
+    const { data } = await axios.get('api/teacher/allbatch');
     dispatch({
       type: ALL_BATCH_SUCCESS,
       payload: data,
@@ -65,19 +57,13 @@ export const allBatchs = (token) => async (dispatch) => {
   }
 };
 
-export const batch = (batchId, token) => async (dispatch) => {
+export const batch = (batchId) => async (dispatch) => {
   try {
     dispatch({
       type: BATCH_DETAILS_REQUEST,
     });
-    const headerConfig = {
-      headers: {
-        'content-type': 'application-json',
-        authorization: `Bearer ${token}`,
-      },
-    };
-    const { data } = await axios.post('/api/teacher/allbatch', headerConfig);
-    console.log('batch details er moddhe ki data asche', data);
+
+    const { data } = await axios.post('/api/teacher/allbatch');
     dispatch({
       type: BATCH_DETAILS_SUCCESS,
       payload: data,

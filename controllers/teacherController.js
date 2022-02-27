@@ -134,6 +134,7 @@ export const getAllBatch = expressAsyncHandler(async (req, res) => {
   res.json(data);
 });
 
+
 /**
  * @ROUTE patch - /api/teacher/addstudenttobatch
  * @Request body - {studentId,batchId}
