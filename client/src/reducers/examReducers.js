@@ -2,6 +2,9 @@ import {
   ALL_EXAM_FAIL,
   ALL_EXAM_REQUEST,
   ALL_EXAM_SUCCESS,
+  CREATE_EXAM_FAIL,
+  CREATE_EXAM_REQUEST,
+  CREATE_EXAM_SUCCESS,
   EXAM_DETAILS_FAIL,
   EXAM_DETAILS_REQUEST,
   EXAM_DETAILS_SUCCESS,
@@ -28,18 +31,24 @@ export const examsReducer = (state = { loading: false }, action) => {
   }
 };
 
+/**
+ * @reducer - create Exam reducer is combined with this one .
+ */
 export const examDetailsReducer = (state = { loading: false }, action) => {
   switch (action.type) {
     case EXAM_DETAILS_REQUEST:
+    case CREATE_EXAM_REQUEST:
       return {
         loading: true,
       };
     case EXAM_DETAILS_SUCCESS:
+    case CREATE_EXAM_SUCCESS:
       return {
         loading: false,
         exam: action.payload,
       };
     case EXAM_DETAILS_FAIL:
+    case CREATE_EXAM_FAIL:
       return {
         loading: false,
         error: action.payload,

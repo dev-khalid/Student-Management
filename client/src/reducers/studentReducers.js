@@ -5,6 +5,9 @@ import {
   STUDENT_DETAILS_FAIL,
   STUDENT_DETAILS_REQUEST,
   STUDENT_DETAILS_SUCCESS,
+  ADD_STUDENT_TO_BATCH_FAIL,
+  ADD_STUDENT_TO_BATCH_REQUEST,
+  ADD_STUDENT_TO_BATCH_SUCCESS,
 } from '../constants/studentConstants';
 
 export const studentsReducer = (state = { loading: false }, action) => {
@@ -44,6 +47,22 @@ export const studentDetailsReducer = (state = { loading: false }, action) => {
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const addStudentToBatchReducer = (
+  state = { loading: false },
+  action
+) => {
+  switch (action.type) {
+    case ADD_STUDENT_TO_BATCH_REQUEST:
+      return { loading: true };
+    case ADD_STUDENT_TO_BATCH_SUCCESS:
+      return { loading: false, updatedBatch: action.payload };
+    case ADD_STUDENT_TO_BATCH_FAIL:
+      return { loading: false, error: action.error };
     default:
       return state;
   }

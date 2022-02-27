@@ -5,8 +5,10 @@ import { userReducer } from './reducers/userReducers';
 import {
   batchsReducer,
   batchDetailsReducer,
+  createBatchReducer,
 } from './reducers/batchReducers.js';
 import {
+  addStudentToBatchReducer,
   studentDetailsReducer,
   studentsReducer,
 } from './reducers/studentReducers';
@@ -21,11 +23,13 @@ const reducers = combineReducers({
   user: userReducer,
   batchs: batchsReducer,
   batchDetails: batchDetailsReducer,
+  createBatch: createBatchReducer,
   students: studentsReducer,
   studentDetails: studentDetailsReducer,
   exams: examsReducer,
   examDetails: examDetailsReducer,
   subjects: subjectsReducers,
+  addStudentToBatch: addStudentToBatchReducer,
 });
 const middlewares = [thunk];
 const initialState = {

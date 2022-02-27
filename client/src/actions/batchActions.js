@@ -5,9 +5,42 @@ import {
   BATCH_DETAILS_FAIL,
   BATCH_DETAILS_REQUEST,
   BATCH_DETAILS_SUCCESS,
+  CREATE_BATCH_FAIL,
+  CREATE_BATCH_REQUEST,
+  CREATE_BATCH_SUCCESS,
 } from '../constants/batchConstants';
 import axios from 'axios';
-import { header } from 'express/lib/request';
+
+export const createBatch =
+  ({ name, fees, token }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: CREATE_BATCH_REQUEST });
+      const { data } = await axios.post(
+        '/api/teacher/createbatch',
+        {
+          headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          name,
+          fees,
+        }
+      );
+      dispatch({
+        type: CREATE_BATCH_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: CREATE_BATCH_FAIL,
+        payload: err,
+      });
+    }
+  };
+
 export const allBatchs = (token) => async (dispatch) => {
   try {
     dispatch({
@@ -16,12 +49,10 @@ export const allBatchs = (token) => async (dispatch) => {
     const headerConfig = {
       headers: {
         'content-type': 'application/json',
-        Authorization:
-          `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     const { data } = await axios.get('api/teacher/allbatch', headerConfig);
-    console.log('batchs er moddhe ki data asche', data);
     dispatch({
       type: ALL_BATCH_SUCCESS,
       payload: data,

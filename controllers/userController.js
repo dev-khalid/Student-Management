@@ -6,7 +6,9 @@ import Teacher from '../models/teacherModel.js';
 import dotenv from 'dotenv';
 import Student from '../models/studentModel.js';
 dotenv.config();
+
 /**@TODO I need to log in the user right away . ? Make the decision later on . */
+
 export const registerUser = expressAsyncHandler(async (req, res, next) => {
   const user = req.body;
 
@@ -22,7 +24,7 @@ export const registerUser = expressAsyncHandler(async (req, res, next) => {
   }
   if (req.body.role == 'student') {
     //create the user and also create student document on the fly
-    //what about guardian number ? 
+    //what about guardian number ?
     const student = await Student.create({
       userId: data._id,
       teacherIds: [req.user._id],
@@ -57,8 +59,8 @@ export const loginUser = expressAsyncHandler(async (req, res) => {
       }
       const token = jwt.sign({ ...user }._doc, process.env.JWT_SECRET);
       const userData = { ...user }._doc;
-      delete userData.password; 
-      userData.token = token; 
+      delete userData.password;
+      userData.token = token;
       return res.json(userData);
     });
   })(req, res);
