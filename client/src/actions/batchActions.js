@@ -57,13 +57,13 @@ export const allBatchs = () => async (dispatch) => {
   }
 };
 
-export const batch = (batchId) => async (dispatch) => {
+export const batchDetails = (batchId) => async (dispatch) => {
   try {
     dispatch({
       type: BATCH_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.post('/api/teacher/allbatch');
+    const { data } = await axios.get(`/api/batch/batchInfo/${batchId}`);
     dispatch({
       type: BATCH_DETAILS_SUCCESS,
       payload: data,

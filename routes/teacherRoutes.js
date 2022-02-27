@@ -34,3 +34,10 @@ router.patch('/addstudenttobatch', addStudentToBatch);
 router.patch('/publishresult', publishResult);
 
 export default router;
+
+
+/**
+ * @TODO 
+ * 1.should be able to update or edit or delete the subjects . 
+ * 
+ */

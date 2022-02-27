@@ -2,24 +2,20 @@ import {
   CREATE_SUBJECT_FAIL,
   CREATE_SUBJECT_REQUEST,
   CREATE_SUBJECT_SUCCESS,
-} from '../constants/subbjectConstants';
+} from '../constants/subjectConstants';
 import axios from 'axios';
+//axios header setting issues fixed .
+const userData = JSON.parse(localStorage.getItem('user'));
+axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
 
-//this token will hold the teacher information
-export const createSubject = (token, name, batchId) => async (dispatch) => {
+export const createSubject = ({name, batchId}) => async (dispatch) => {
   try {
     dispatch({
       type: CREATE_SUBJECT_REQUEST,
     });
 
     const { data } = await axios.post(
-      'api/teacher/createsubject',
-      {
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
-      },
+      '/api/teacher/createsubject', 
       {
         name,
         batchId,
