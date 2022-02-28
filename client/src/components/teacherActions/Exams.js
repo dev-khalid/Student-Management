@@ -3,6 +3,7 @@ import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import CreateExam from './CreateExam';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 const { Column } = Table;
 
 const Exams = ({ batch }) => {
@@ -12,9 +13,11 @@ const Exams = ({ batch }) => {
   if (batch?.examIds?.length > 0) {
     batch.examIds.forEach((exam) => {
       let formatedData = { ...exam };
+      formatedData.examDate = moment(exam.examDate).format('DD/MM/yyyy');
       formatedData.key = exam._id;
       formatedData.subject = exam.subjectName;
       formatedData.batch = batch.name;
+      formatedData.publishDate = moment(exam.publishDate).format('DD/MM/yyyy');
       formatedData.schedule = exam.startTime.includes('undefined')
         ? 'Schedule is not set yet'
         : `${exam.startTime}-${exam.endTime}`;
@@ -29,8 +32,13 @@ const Exams = ({ batch }) => {
     <>
       <CreateExam batch={batch} />
 
-      <Table dataSource={data}>
-        <Column key="examdate" title="Exam Date" dataIndex="examDate" />
+      <Table dataSource={data} scroll={{ x: 1500 }}>
+        <Column
+          key="examdate"
+          fixed="left"
+          title="Exam Date"
+          dataIndex="examDate"
+        />
         <Column title="Subject" key="subject" dataIndex="subject" />
 
         {/* <Column title="Batch" dataIndex="batch" key="batch" /> */}
@@ -50,8 +58,9 @@ const Exams = ({ batch }) => {
         <Column
           title="Actions"
           dataIndex="_id"
+          fixed="right"
           render={(_id) => (
-            <Link to={`/profile/exams/${_id}`}>
+            <Link to={`/profile/examdetails/${_id}`}>
               <Button type="primary" onClick={() => viewHandler(_id)}>
                 <EyeOutlined />
               </Button>
@@ -64,3 +73,5 @@ const Exams = ({ batch }) => {
 };
 
 export default Exams;
+
+

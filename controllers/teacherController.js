@@ -182,27 +182,16 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
   res.json(students);
 });
 
-
 /**
  * @ROUTE patch - /api/teacher/publishresult
  * @Request body - {participants: [{studentId: 'something' , mark: 50}]}
  */
 export const publishResult = expressAsyncHandler(async (req, res) => {
-  //i need to to sort the result here . right away .
-  // const result = await Exam.findByIdAndUpdate(
-  //   req.body.examId,
-  //   {
-  //     //here i am replacing all the participants . this is not the right way to complete this one .
-  //     participants: req.body.participants,
-  //   },
-  //   {
-  //     new: true,
-  //   }
-  // );
+  const { examId } = req.body;
 
-  const result = await Exam.find();
-  result.participants.forEach((participant) => {
-    req.body.participants.forEach((student) => {
+  const result = await Exam.findById(examId);
+  result?.participants?.forEach((participant) => {
+    req.body?.participants?.forEach((student) => {
       if (student.studnetId === participant.studentId)
         participant.mark = student.mark;
     });
