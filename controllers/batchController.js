@@ -10,6 +10,10 @@ export const batchInfo = expressAsyncHandler(async (req, res) => {
     .populate({
       path: 'examIds',
     })
-    .populate({ path: 'studentIds', model: 'User', select: 'name email -_id' });
+    .populate({
+      path: 'studentIds',
+      model: 'User',
+      select: 'name email contract _id',
+    });
   res.json(data);
 });

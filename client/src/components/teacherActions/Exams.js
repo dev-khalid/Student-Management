@@ -5,40 +5,43 @@ import CreateExam from './CreateExam';
 import { Link } from 'react-router-dom';
 const { Column } = Table;
 
-const Exams = ({batch}) => {
+const Exams = ({ batch }) => {
   /**@TODO - I need to make this much more dynamic so that it can render exams teacher specific , batch specific and student specific . */
-  
 
-  const data = [
-    {
-      key: '_id of the exa',
-      examDate: '12/02/2022',
-      subject: 'Physics',
-      batch: 'Inter Second year Physics Batch',
-      participantsNumber: 10,
-      totalMark: 100,
-      publishDate: '17/02/2022',
-      _id: 'exam er id ta er moddhe bose jabe ',
-    },
-  ];
+  let data = [];
+  if (batch?.examIds?.length > 0) {
+    batch.examIds.forEach((exam) => {
+      let formatedData = { ...exam };
+      formatedData.key = exam._id;
+      formatedData.subject = exam.subjectName;
+      formatedData.batch = batch.name;
+      formatedData.schedule = exam.startTime.includes('undefined')
+        ? 'Schedule is not set yet'
+        : `${exam.startTime}-${exam.endTime}`;
+      data.push(formatedData);
+    });
+  }
+
   const viewHandler = (_id) => {
     console.log(_id, 'clicked');
   };
   return (
     <>
-      <CreateExam  batch={batch}/>
+      <CreateExam batch={batch} />
 
       <Table dataSource={data}>
         <Column key="examdate" title="Exam Date" dataIndex="examDate" />
         <Column title="Subject" key="subject" dataIndex="subject" />
-        <Column title="Batch" dataIndex="batch" key="batch" />
-        <Column
+
+        {/* <Column title="Batch" dataIndex="batch" key="batch" /> */}
+        {/* <Column
           title="Participants"
           dataIndex="participantsNumber"
           key="participants"
-        />
+        /> */}
         <Column title="Mark" dataIndex="totalMark" key="mark" />
         <Column title="Time" dataIndex="time" key="time" />
+        <Column title="Schedule" dataIndex="schedule" key="schedule" />
         <Column
           title="Result Publish Date"
           dataIndex="publishDate"

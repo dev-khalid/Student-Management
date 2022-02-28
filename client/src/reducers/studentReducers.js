@@ -8,7 +8,31 @@ import {
   ADD_STUDENT_TO_BATCH_FAIL,
   ADD_STUDENT_TO_BATCH_REQUEST,
   ADD_STUDENT_TO_BATCH_SUCCESS,
+  CREATE_STUDENT_REQUEST,
+  CREATE_STUDENT_SUCCESS,
+  CREATE_STUDENT_FAIL,
 } from '../constants/studentConstants';
+
+export const createStudentReducer = (state = { loading: false }, action) => {
+  switch (action.type) {
+    case CREATE_STUDENT_REQUEST:
+      return {
+        loading: true,
+      };
+    case CREATE_STUDENT_SUCCESS:
+      return {
+        loading: false,
+        student: action.payload,
+      };
+    case CREATE_STUDENT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 export const studentsReducer = (state = { loading: false }, action) => {
   switch (action.type) {

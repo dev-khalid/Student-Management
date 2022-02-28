@@ -15,6 +15,7 @@ const CreateExam = ({ batch }) => {
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [subjectId, setSubjectId] = useState();
+  const [subjectName, setSubjectName] = useState('');
   const [totalMark, setTotalMark] = useState();
   const [sM, setSM] = useState('AM'); //this is for start time in pm or am ?
   const [eM, setEM] = useState('AM'); //this is for end time in pm or am ?
@@ -32,7 +33,7 @@ const CreateExam = ({ batch }) => {
         publishDate,
         startTime: `${startTime} ${sM}`,
         endTime: `${endTime} ${eM}`,
-        subjectId,
+        subjectName,
         batchId: batch._id,
         totalMark,
       })
@@ -78,12 +79,16 @@ const CreateExam = ({ batch }) => {
             <Form.Item label="Choose Subject">
               <Select
                 defaultValue={'Choose subject for exam'}
-                onChange={(val) => setSubjectId(val)}
+                onChange={(val) => setSubjectName(val)}
               >
                 {batch.subjectIds.length > 0 &&
                   batch.subjectIds.map((subject) => {
                     return (
-                      <Option key={subject?._id} value={subject?._id}>
+                      <Option
+                        key={subject?._id}
+                        custom={subject?._id}
+                        value={subject?.name}
+                      >
                         {subject?.name}
                       </Option>
                     );

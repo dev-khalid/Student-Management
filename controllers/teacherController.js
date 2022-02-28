@@ -182,6 +182,7 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
   res.json(students);
 });
 
+
 /**
  * @ROUTE patch - /api/teacher/publishresult
  * @Request body - {participants: [{studentId: 'something' , mark: 50}]}

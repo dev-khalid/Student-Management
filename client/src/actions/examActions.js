@@ -18,6 +18,7 @@ export const createExam =
     startTime,
     endTime,
     publishDate = undefined,
+    subjectName,
   }) =>
   async (dispatch) => {
     try {
@@ -32,6 +33,7 @@ export const createExam =
         startTime,
         endTime,
         publishDate,
+        subjectName,
       });
       dispatch({
         type: CREATE_EXAM_SUCCESS,
@@ -44,4 +46,3 @@ export const createExam =
       });
     }
   };
-

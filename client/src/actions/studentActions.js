@@ -8,8 +8,55 @@ import {
   ADD_STUDENT_TO_BATCH_FAIL,
   ADD_STUDENT_TO_BATCH_REQUEST,
   ADD_STUDENT_TO_BATCH_SUCCESS,
+  CREATE_STUDENT_REQUEST,
+  CREATE_STUDENT_SUCCESS,
+  CREATE_STUDENT_FAIL,
 } from '../constants/studentConstants';
 import axios from 'axios';
+
+//axios header setting issues fixed .
+const userData = JSON.parse(localStorage.getItem('user'));
+axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+
+//Create Student
+export const createStudent =
+  ({
+    name,
+    email,
+    password,
+    contract = undefined,
+    role = 'student',
+    batchId,
+  }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: CREATE_STUDENT_REQUEST,
+      });
+
+      const { data } = await axios.post('/api/teacher/createstudent', {
+        name,
+        email,
+        password,
+        contract,
+        role,
+      });
+      //I WANT TO ADD THE STUDENTS RIGHT AWAY TO THE BATCH .
+      await axios.patch('api/teacher/addstudenttobatch', {
+        studentId: data._id,
+        batchId,
+      });
+      dispatch({
+        type: CREATE_STUDENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_STUDENT_FAIL,
+        error,
+      });
+    }
+  };
 
 //this token will hold the teacher information
 export const addStudentToBatchAction =

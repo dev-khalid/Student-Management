@@ -9,6 +9,7 @@ import {
 } from './reducers/batchReducers.js';
 import {
   addStudentToBatchReducer,
+  createStudentReducer,
   studentDetailsReducer,
   studentsReducer,
 } from './reducers/studentReducers';
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   examDetails: examDetailsReducer,
   subjects: subjectsReducers,
   addStudentToBatch: addStudentToBatchReducer,
+  createStudent: createStudentReducer,
 });
 const middlewares = [thunk];
 const initialState = {

@@ -1,15 +1,18 @@
 import mongoose from 'mongoose';
 
 const examSchema = mongoose.Schema({
-  examDate: { 
-    type: Date, 
+  examDate: {
+    type: Date,
     required: [true, 'Exam must have a date'],
   },
   teacherId: {
     type: mongoose.Types.ObjectId,
     ref: 'Teacher',
   },
-
+  subjectName: {
+    type: String,
+    required: true,
+  },
   subjectId: {
     type: mongoose.Types.ObjectId,
     ref: 'Subject',
@@ -25,7 +28,7 @@ const examSchema = mongoose.Schema({
   //by default all students should be added to this participants list from selected batch
   participants: [
     {
-      studentId: { 
+      studentId: {
         type: mongoose.Types.ObjectId,
         ref: 'Student',
       },

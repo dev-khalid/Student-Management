@@ -10,10 +10,10 @@ import { batchDetails } from '../../actions/batchActions';
 const { Title } = Typography;
 
 const BatchDetails = () => {
-  const params = useParams(); 
+  const params = useParams();
 
   const dispatch = useDispatch();
-  const { loading, batch, error } = useSelector((state) => state.batchDetails); 
+  const { loading, batch, error } = useSelector((state) => state.batchDetails);
 
   useEffect(() => {
     dispatch(batchDetails(params.batchId));
@@ -24,14 +24,16 @@ const BatchDetails = () => {
         Its more than important to complete Payments Handling.
       </Title>
 
-      <Title level={4}>Batch: Inter First Year Physics</Title>
+      <Title level={4} style={{ textAlign: 'center' }}>
+        Batch: {batch?.name}
+      </Title>
 
       <Title level={4}>Students </Title>
-      {/* <Students /> */}
+      <Students batch={batch} />
       <Title level={4}>Subjects</Title>
-      <Subjects subjects={batch?.subjectIds}/>
+      <Subjects subjects={batch?.subjectIds} />
       <Title level={4}>Exams</Title>
-      <Exams batch={batch}/>
+      <Exams batch={batch} />
       <Title level={4}>Routines</Title>
       <Routines />
     </>
