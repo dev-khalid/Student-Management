@@ -8,10 +8,13 @@ const CreateSubject = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState();
-  
+
   const { loading } = useSelector((state) => state.subjects);
   const { batch } = useSelector((state) => state.batchDetails); //this will provide us the current batch information .
 
+  /**
+   * @TODO - use socket to reflect the changes on database of subjects 
+   */
   const submitHandler = () => {
     dispatch(createSubject({ name, batchId: batch._id }));
     setVisible(false);

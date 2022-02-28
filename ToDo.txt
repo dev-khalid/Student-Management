@@ -56,3 +56,21 @@ Functional Part
 
  
 I will add more functionalities soon . i will surely complete this project. 
+
+
+TODO - 
+
+//get all exam list 
+//exam details 
+//publish result 
+
+All stdent list of a batch 
+Create Student from a batch 
+
+
+Handle their payments.
+Monthly view of 
+Due 
+Paid 
+
+

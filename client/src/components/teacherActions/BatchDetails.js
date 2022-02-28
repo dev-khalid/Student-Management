@@ -10,12 +10,10 @@ import { batchDetails } from '../../actions/batchActions';
 const { Title } = Typography;
 
 const BatchDetails = () => {
-  const params = useParams();
-  console.log(params.batchId);
+  const params = useParams(); 
 
   const dispatch = useDispatch();
-  const { loading, batch, error } = useSelector((state) => state.batchDetails);
-  console.log('whats the batch details', batch);
+  const { loading, batch, error } = useSelector((state) => state.batchDetails); 
 
   useEffect(() => {
     dispatch(batchDetails(params.batchId));
@@ -33,7 +31,7 @@ const BatchDetails = () => {
       <Title level={4}>Subjects</Title>
       <Subjects subjects={batch?.subjectIds}/>
       <Title level={4}>Exams</Title>
-      <Exams />
+      <Exams batch={batch}/>
       <Title level={4}>Routines</Title>
       <Routines />
     </>

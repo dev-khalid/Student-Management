@@ -11,8 +11,7 @@ const { Column } = Table;
 const Batchs = () => {
   const dispatch = useDispatch();
 
-  const { loading, error, batchs } = useSelector((state) => state.batchs);
-  console.log('batchs er moddhe ki ache ? ', batchs);
+  const { loading, error, batchs } = useSelector((state) => state.batchs); 
   useEffect(() => {
     dispatch(allBatchs());
   }, []);
@@ -54,8 +53,7 @@ const Batchs = () => {
           title="Subjects"
           dataIndex="subjects"
           key="subjects"
-          render={(subjects) => {
-            console.log(subjects);
+          render={(subjects) => { 
             let colors = ['geekblue', 'volcano'];
             let id = 1;
             return (

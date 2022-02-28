@@ -71,16 +71,18 @@ export const createSubject = expressAsyncHandler(async (req, res) => {
 export const createExam = expressAsyncHandler(async (req, res) => {
   const data = req.body;
   const { studentIds } = await Batch.findById(req.body.batchId);
-  const formatParticipants = studentIds.map((item) => {
-    return {
-      studentId: item,
-      mark: 0,
-    };
-  });
+  const formatParticipants =
+    studentIds?.length > 0
+      ? studentIds?.map((item) => {
+          return {
+            studentId: item,
+            mark: 0,
+          };
+        })
+      : [];
 
   data.participants = formatParticipants;
   data.teacherId = req.user._id;
-
   const exam = await Exam.create(data);
   const batch = await Batch.findByIdAndUpdate(req.body.batchId, {
     $push: {
@@ -133,7 +135,6 @@ export const getAllBatch = expressAsyncHandler(async (req, res) => {
     .populate('examIds');
   res.json(data);
 });
-
 
 /**
  * @ROUTE patch - /api/teacher/addstudenttobatch

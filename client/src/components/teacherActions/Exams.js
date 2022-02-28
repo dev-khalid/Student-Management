@@ -5,8 +5,10 @@ import CreateExam from './CreateExam';
 import { Link } from 'react-router-dom';
 const { Column } = Table;
 
-const Exams = () => {
+const Exams = ({batch}) => {
   /**@TODO - I need to make this much more dynamic so that it can render exams teacher specific , batch specific and student specific . */
+  
+
   const data = [
     {
       key: '_id of the exa',
@@ -24,7 +26,7 @@ const Exams = () => {
   };
   return (
     <>
-      <CreateExam />
+      <CreateExam  batch={batch}/>
 
       <Table dataSource={data}>
         <Column key="examdate" title="Exam Date" dataIndex="examDate" />
