@@ -5,6 +5,7 @@ import Students from './Students';
 import Subjects from './Subjects';
 import Exams from './Exams';
 import Routines from './Routines';
+import Payments from './Payments'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { batchDetails } from '../../actions/batchActions';
 const { Title } = Typography;
@@ -34,6 +35,8 @@ const BatchDetails = () => {
       <Subjects subjects={batch?.subjectIds} />
       <Title level={4}>Exams</Title>
       <Exams batch={batch} />
+      <Title level={4}>Payments </Title>
+      <Payments />
       <Title level={4}>Routines</Title>
       <Routines />
     </>

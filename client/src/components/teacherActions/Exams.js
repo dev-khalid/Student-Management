@@ -35,7 +35,6 @@ const Exams = ({ batch }) => {
       <Table dataSource={data} scroll={{ x: 1500 }}>
         <Column
           key="examdate"
-          fixed="left"
           title="Exam Date"
           dataIndex="examDate"
         />
@@ -58,7 +57,6 @@ const Exams = ({ batch }) => {
         <Column
           title="Actions"
           dataIndex="_id"
-          fixed="right"
           render={(_id) => (
             <Link to={`/profile/examdetails/${_id}`}>
               <Button type="primary" onClick={() => viewHandler(_id)}>

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 const paymentSchema = mongoose.Schema({
-  amountPaid: {
-    type: Number,
-    default: 0,
-  },
+  // amountPaid: {
+  //   type: Number,
+  //   default: 0,
+  // },
   paymentOf: {
     type: Date,
   },
@@ -13,14 +13,17 @@ const paymentSchema = mongoose.Schema({
   batchId: {
     type: mongoose.Types.ObjectId,
     ref: 'Batch',
+    required: true,
   },
   teacherId: {
     type: mongoose.Types.ObjectId,
     ref: 'Teacher',
+    required: true,
   },
   studentId: {
     type: mongoose.Types.ObjectId,
     ref: 'Student',
+    required: true,
   },
 });
 

@@ -8,16 +8,15 @@ import { useSelector, useDispatch } from 'react-redux';
 const { Column } = Table;
 
 const Students = ({ batch }) => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   let data = [];
 
-  if(batch?.studentIds?.length> 0 ) { 
-    batch.studentIds.forEach(student=> { 
-      data.push({...student,key:student._id})
-
-    })
+  if (batch?.studentIds?.length > 0) {
+    batch.studentIds.forEach((student) => {
+      data.push({ ...student, key: student._id });
+    });
   }
-  
+
   const deleteHandler = () => console.log('deleted');
   return (
     <>
@@ -27,9 +26,9 @@ const Students = ({ batch }) => {
 
       {/**@TODO the table is not mobile responsive i need to make this responsive . */}
 
-      <Table dataSource={data}>
+      <Table dataSource={data} scroll={{ x: 1000 }}>
         <Column title="Name" dataIndex="name" key="name" />
-        <Column title="Email" dataIndex="email" key="email" /> 
+        <Column title="Email" dataIndex="email" key="email" />
         <Column title="Contract" dataIndex="contract" key="contract" />
         <Column
           title="Guardian Number"
