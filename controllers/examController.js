@@ -2,15 +2,17 @@ import expressAsyncHandler from 'express-async-handler';
 import Exam from '../models/examModel.js';
 
 //this controller can be further used for result also .
+/**
+ * @ROUTE get - /api/exam/examdetails/:examId
+ */
 export const examDetails = expressAsyncHandler(async (req, res) => {
   const data = await Exam.findById(req.params.examId)
     .populate({
       path: 'participants.studentId',
-      select: '-_id name email',
+      select: '_id name email contract',
       model: 'User',
-    }) //'User'
-    .populate('batchId')
-    .populate('subjectId');
+    })
+    .populate('batchId'); 
   res.json(data);
 });
 

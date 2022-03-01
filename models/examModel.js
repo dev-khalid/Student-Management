@@ -30,7 +30,7 @@ const examSchema = mongoose.Schema({
     {
       studentId: {
         type: mongoose.Types.ObjectId,
-        ref: 'Student',
+        ref: 'User',
       },
       mark: {
         type: Number,

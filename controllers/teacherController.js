@@ -188,15 +188,16 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
  */
 export const publishResult = expressAsyncHandler(async (req, res) => {
   const { examId } = req.body;
-
+  console.log('whats inside', req.body.participant);
   const result = await Exam.findById(examId);
   result?.participants?.forEach((participant) => {
     req.body?.participants?.forEach((student) => {
-      if (student.studnetId === participant.studentId)
+      if (student.studentId === participant.studentId)
         participant.mark = student.mark;
     });
   });
   //this should update the result
   result.save();
+  console.log('result ki asche ', result);
   res.json(result);
 });

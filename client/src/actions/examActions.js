@@ -2,6 +2,12 @@ import {
   CREATE_EXAM_FAIL,
   CREATE_EXAM_REQUEST,
   CREATE_EXAM_SUCCESS,
+  EXAM_DETAILS_FAIL,
+  EXAM_DETAILS_REQUEST,
+  EXAM_DETAILS_SUCCESS,
+  PUBLISH_RESULT_FAIL,
+  PUBLISH_RESULT_REQUEST,
+  PUBLISH_RESULT_SUCCESS,
 } from '../constants/examConstants';
 
 import axios from 'axios';
@@ -52,75 +58,46 @@ export const createExam =
  * @Request body - {examId,participants: [{studentId: 'something' , mark: 50}]}
  */
 export const publishResultAction =
-  ({
-    batchId,
-    totalMark,
-    examDate,
-    startTime,
-    endTime,
-    publishDate = undefined,
-    subjectName,
-  }) =>
+  ({ examId, participants }) =>
   async (dispatch) => {
     try {
       dispatch({
-        type: CREATE_EXAM_REQUEST,
+        type: PUBLISH_RESULT_REQUEST,
       });
 
-      const { data } = await axios.post('/api/teacher/createexam', {
-        batchId,
-        totalMark,
-        examDate,
-        startTime,
-        endTime,
-        publishDate,
-        subjectName,
+      console.log('whats inside participants', participants);
+
+      const { data } = await axios.patch('/api/teacher/publishresult', {
+        examId,
+        participants,
       });
       dispatch({
-        type: CREATE_EXAM_SUCCESS,
+        type: PUBLISH_RESULT_SUCCESS,
         payload: data,
       });
     } catch (error) {
       dispatch({
-        type: CREATE_EXAM_FAIL,
+        type: PUBLISH_RESULT_FAIL,
         error: error,
       });
     }
   };
 
-export const examDetailsAction =
-  ({
-    batchId,
-    totalMark,
-    examDate,
-    startTime,
-    endTime,
-    publishDate = undefined,
-    subjectName,
-  }) =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: CREATE_EXAM_REQUEST,
-      });
+export const examDetailsAction = (examId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: EXAM_DETAILS_REQUEST,
+    });
 
-      const { data } = await axios.post('/api/teacher/createexam', {
-        batchId,
-        totalMark,
-        examDate,
-        startTime,
-        endTime,
-        publishDate,
-        subjectName,
-      });
-      dispatch({
-        type: CREATE_EXAM_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: CREATE_EXAM_FAIL,
-        error: error,
-      });
-    }
-  };
+    const { data } = await axios.get(`/api/exam/examdetails/${examId}`);
+    dispatch({
+      type: EXAM_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: EXAM_DETAILS_FAIL,
+      error: error,
+    });
+  }
+};
