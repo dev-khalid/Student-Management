@@ -57,31 +57,30 @@ export const createExam =
  * @ROUTE patch - /api/teacher/publishresult
  * @Request body - {examId,participants: [{studentId: 'something' , mark: 50}]}
  */
-export const publishResultAction =
-  ({ examId, participants }) =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: PUBLISH_RESULT_REQUEST,
-      });
+export const publishResultAction = (obj) => async (dispatch) => {
+  try {
+    dispatch({
+      type: PUBLISH_RESULT_REQUEST,
+    });
+    const { examId, participants } = obj;
 
-      console.log('whats inside participants', participants);
+    console.log('whats inside object', obj);
 
-      const { data } = await axios.patch('/api/teacher/publishresult', {
-        examId,
-        participants,
-      });
-      dispatch({
-        type: PUBLISH_RESULT_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: PUBLISH_RESULT_FAIL,
-        error: error,
-      });
-    }
-  };
+    const { data } = await axios.patch('/api/teacher/publishresult', {
+      examId,
+      participants,
+    });
+    dispatch({
+      type: PUBLISH_RESULT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PUBLISH_RESULT_FAIL,
+      error: error,
+    });
+  }
+};
 
 export const examDetailsAction = (examId) => async (dispatch) => {
   try {

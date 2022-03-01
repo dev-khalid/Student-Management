@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Button, Typography } from 'antd';
+import { Table, Input, Button, Typography, Timeline } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 import {
   examDetailsAction,
   publishResultAction,
@@ -19,7 +20,7 @@ const ExamDetails = () => {
   const { loading, exam } = useSelector((state) => state.examDetails);
   useEffect(() => {
     dispatch(examDetailsAction(params.examId));
-  }, [params.examId]);
+  }, []);
 
   if (exam && exam.participants?.length > 0) {
     exam.participants.forEach((participant) => {
@@ -37,7 +38,6 @@ const ExamDetails = () => {
   }
 
   const updater = (studentData) => {
-    console.log('previous one', marksOfStudents);
     marksOfStudents = marksOfStudents.filter(
       (studentObj) => studentData.studentId !== studentObj.studentId
     );
@@ -55,14 +55,57 @@ const ExamDetails = () => {
   };
   return (
     <div>
-      <Title level={5} style={{ textAlign: 'center' }}>
+      <Title level={5} style={{ marginBottom: '20px' }}>
         ExamDetails
       </Title>
+      {exam && (
+        <Timeline>
+          <Timeline.Item>
+            Batch Name:{' '}
+            <span style={{ fontWeight: '700' }}>{exam?.batchId?.name}</span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Number of Participants:{' '}
+            <span style={{ fontWeight: '700' }}>
+              {exam?.participants?.length || 0}
+            </span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Subject:{' '}
+            <span style={{ fontWeight: '700' }}>{exam?.subjectName}</span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Exam Held Date:{' '}
+            <span style={{ fontWeight: '700' }}>
+              {exam?.examDate && moment(exam.examDate).format('DD-MM-yyyy')}
+            </span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Total Marks Held Date:{' '}
+            <span style={{ fontWeight: '700' }}>{exam?.totalMark}</span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Exam Schedule:{' '}
+            <span style={{ fontWeight: '700' }}>
+              {exam?.startTime}-{exam?.endTime}
+            </span>
+          </Timeline.Item>
+          <Timeline.Item>
+            Result Publish Date:{' '}
+            <span style={{ fontWeight: '700' }}>
+              {exam?.publishDate
+                ? moment(exam.publishDate).format('DD-MM-yyyy')
+                : 'Not Decided yet'}
+            </span>
+          </Timeline.Item>
+        </Timeline>
+      )}
+
       <Table
         scroll={{ x: 800 }}
         dataSource={data}
         footer={() =>
-          changed && (
+          1 && (
             <div style={{ textAlign: 'center' }}>
               <Button type="primary" onClick={updateResult}>
                 {' '}
@@ -82,9 +125,9 @@ const ExamDetails = () => {
           render={({ studentId, mark }) => {
             return (
               <Input
+                type="number"
                 defaultValue={mark}
                 onChange={(e) => {
-                  setChanged(true);
                   updater({ studentId, mark: e.target.value });
                 }}
               />
