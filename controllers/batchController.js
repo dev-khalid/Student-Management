@@ -14,6 +14,6 @@ export const batchInfo = expressAsyncHandler(async (req, res) => {
       path: 'studentIds',
       model: 'User',
       select: 'name email contract _id',
-    });
+    }); 
   res.json(data);
 });

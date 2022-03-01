@@ -46,3 +46,81 @@ export const createExam =
       });
     }
   };
+
+/**
+ * @ROUTE patch - /api/teacher/publishresult
+ * @Request body - {examId,participants: [{studentId: 'something' , mark: 50}]}
+ */
+export const publishResultAction =
+  ({
+    batchId,
+    totalMark,
+    examDate,
+    startTime,
+    endTime,
+    publishDate = undefined,
+    subjectName,
+  }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: CREATE_EXAM_REQUEST,
+      });
+
+      const { data } = await axios.post('/api/teacher/createexam', {
+        batchId,
+        totalMark,
+        examDate,
+        startTime,
+        endTime,
+        publishDate,
+        subjectName,
+      });
+      dispatch({
+        type: CREATE_EXAM_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_EXAM_FAIL,
+        error: error,
+      });
+    }
+  };
+
+export const examDetailsAction =
+  ({
+    batchId,
+    totalMark,
+    examDate,
+    startTime,
+    endTime,
+    publishDate = undefined,
+    subjectName,
+  }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: CREATE_EXAM_REQUEST,
+      });
+
+      const { data } = await axios.post('/api/teacher/createexam', {
+        batchId,
+        totalMark,
+        examDate,
+        startTime,
+        endTime,
+        publishDate,
+        subjectName,
+      });
+      dispatch({
+        type: CREATE_EXAM_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_EXAM_FAIL,
+        error: error,
+      });
+    }
+  };

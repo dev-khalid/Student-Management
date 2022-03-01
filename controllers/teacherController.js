@@ -184,7 +184,7 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
 
 /**
  * @ROUTE patch - /api/teacher/publishresult
- * @Request body - {participants: [{studentId: 'something' , mark: 50}]}
+ * @Request body - {examId,participants: [{studentId: 'something' , mark: 50}]}
  */
 export const publishResult = expressAsyncHandler(async (req, res) => {
   const { examId } = req.body;
