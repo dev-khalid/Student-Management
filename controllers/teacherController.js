@@ -188,7 +188,7 @@ export const getAllStudent = expressAsyncHandler(async (req, res) => {
  */
 export const publishResult = expressAsyncHandler(async (req, res) => {
   const { examId } = req.body;
-  const result = await Exam.findById(examId); 
+  const result = await Exam.findById(examId);
   result?.participants?.forEach((participant) => {
     req.body?.participants?.forEach((student) => {
       if (student.studentId == participant.studentId)
@@ -198,3 +198,7 @@ export const publishResult = expressAsyncHandler(async (req, res) => {
   result.save();
   res.json(result);
 });
+
+//controlller for student due calculation .
+//controller for teachers next month earning and pawna from all students with their due month statistics .
+//paid months statistics can be seen in the batch information .
