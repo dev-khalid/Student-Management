@@ -24,8 +24,7 @@ export const createBatch =
       const { data } = await axios.post('/api/teacher/createbatch', {
         name,
         fees,
-      });
-      console.log('which data is coming back ? ', data);
+      }); 
       dispatch({
         type: CREATE_BATCH_SUCCESS,
         payload: data,

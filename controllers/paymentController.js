@@ -19,7 +19,7 @@ export const paymentInfo = expressAsyncHandler(async (req, res) => {
         paymentOf: { $lte: moment(date).endOf('month') },
       },
     ],
-  });
+  }).populate('studentId', 'name email _id');
 
   res.json(data);
 });
@@ -65,7 +65,7 @@ export const createPayment = expressAsyncHandler(async (req, res) => {
  * @REQUEST - body - {batchId,studentId,paymentOf,paidAt}
  */
 
-export const confirmPayment = expressAsyncHandler(async (req, res) => {
+export const confirmPayment = expressAsyncHandler(async (req, res) => { 
   let { batchId, studentId, paymentOf, paidAt } = req.body;
   let lastMonth = moment().subtract(1, 'M').format();
   paymentOf = moment(paymentOf || lastMonth)
@@ -74,8 +74,7 @@ export const confirmPayment = expressAsyncHandler(async (req, res) => {
     .format();
   paidAt = moment(paidAt || new Date())
     .utcOffset('+6:00')
-    .format();
-  console.log(paymentOf, paidAt);
+    .format(); 
   const data = await Payment.findOneAndUpdate(
     { batchId, studentId, paymentOf },
     { paidAt },

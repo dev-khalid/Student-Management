@@ -13,7 +13,10 @@ import {
   studentDetailsReducer,
   studentsReducer,
 } from './reducers/studentReducers';
-
+import {
+  paymentInfoReducer,
+  confirmPaymentReducer,
+} from './reducers/paymentReducers';
 import { examDetailsReducer, examsReducer } from './reducers/examReducers.js';
 import { subjectsReducers } from './reducers/subjectReducers';
 
@@ -32,6 +35,8 @@ const reducers = combineReducers({
   subjects: subjectsReducers,
   addStudentToBatch: addStudentToBatchReducer,
   createStudent: createStudentReducer,
+  paymentInfo: paymentInfoReducer, 
+  confirmPayment: confirmPaymentReducer
 });
 const middlewares = [thunk];
 const initialState = {

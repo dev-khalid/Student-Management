@@ -22,7 +22,7 @@ const paymentSchema = mongoose.Schema({
   },
   studentId: {
     type: mongoose.Types.ObjectId,
-    ref: 'Student',
+    ref: 'User',
     required: true,
   },
 });
